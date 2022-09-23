@@ -1,4 +1,4 @@
-import todoLogo from '../assets/logo.svg';
+import todoLogo from '../../assets/logo.svg';
 
 import styles from './Header.module.css';
 

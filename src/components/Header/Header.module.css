@@ -7,4 +7,5 @@
   justify-content: center;
 
   background-color: var(--gray-700);
+  margin-bottom: calc(0px - 27px);
 }
