@@ -1,8 +1,111 @@
 .container {
   width: 100vw;
   height: 100vh;
+  padding: 0 0.5rem 2rem;
 
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  overflow-x: hidden;
+  overflow-y: scroll;
+
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.container::-webkit-scrollbar {
+  display: none;
+}
+
+.main {
+  width: 100%;
+  max-width: 46rem;
+}
+
+.inputContainer {
+  width: 100%;
+  height: 3.375rem;
+
+  display: flex;
+  flex-direction: row;
+
+  margin-bottom: 4rem;
+}
+
+.toDoContent {}
+
+.toDoinfo {
+  width: 100%;
+  height: 1.1875rem;
+  margin-bottom: 1.5rem;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.createdText {
+  color: var(--blue-500);
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.createdNumber {
+  color: var(--gray-200);
+  font-size: 0.875rem;
+  font-weight: 700;
+
+  background-color: var(--gray-400);
+  padding: 0.125rem 0.5rem;
+  border-radius: 999px;
+
+  margin-left: 0.5rem;
+}
+
+.finishedText {
+  color: var(--purple-500);
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.finishedNumber {
+  color: var(--gray-200);
+  font-size: 0.875rem;
+  font-weight: 700;
+
+  background-color: var(--gray-400);
+  padding: 0.125rem 0.5rem;
+  border-radius: 999px;
+
+  margin-left: 0.5rem;
+}
+
+.emptyContainer {
+  width: 100%;
+  border-top: 1px solid var(--gray-400);
+  border-radius: 8px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.emptyImage {
+  margin-top: 4rem;
+}
+
+.emptyTitle {
+  margin-top: 1rem;
+  color: var(--gray-300);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.emptySubtitle {
+  color: var(--gray-300);
+  font-size: 1rem;
+  font-weight: 400;
 }

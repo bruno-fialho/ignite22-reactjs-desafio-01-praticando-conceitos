@@ -1,6 +1,7 @@
 .header {
   width: 100vw;
   height: 12.5rem;
+  min-height: 12.5rem;
 
   display: flex;
   align-items: center;

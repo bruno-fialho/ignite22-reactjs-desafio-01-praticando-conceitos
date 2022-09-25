@@ -1,0 +1,73 @@
+.container {
+  width: 100%;
+  min-height: 4.5rem;
+  padding: 1rem;
+
+  background-color: var(--gray-500);
+  border: 1px solid var(--gray-400);
+  border-radius: 8px;
+  box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.06);
+
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.container + .container {
+  margin-top: 0.75rem;
+}
+
+.customCheckbox {
+  border: none;
+  border-radius: 4px;
+  padding: 0;
+  cursor: pointer;
+
+  background-color: transparent;
+
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */
+}
+
+.circleBox {
+  color: var(--blue-500);
+
+  transition: color 0.2s;
+}
+
+.circleBox:hover {
+  color: var(--blue-700);
+}
+
+.checkedBox {
+  color: var(--purple-500);
+
+  transition: color 0.2s;
+}
+
+.checkedBox:hover {
+  color: var(--purple-700);
+}
+
+.text {
+  width: 100%;
+  margin: 0 12px;
+}
+
+.customDeleteButton {
+  background: transparent;
+  border: 0;
+  color: var(--gray-300);
+  cursor: pointer;
+  line-height: 0;
+  border-radius: 4px;
+  padding: 0.25rem;
+
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.customDeleteButton:hover {
+  background-color: var(--gray-400);
+  color: var(--red-500);
+}
