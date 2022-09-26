@@ -2,12 +2,12 @@ import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { PlusCircle } from 'phosphor-react';
 
-import emptyListImg from './assets/emptyListImg.svg';
+import emptyImage from './assets/empty.svg';
 
 import { Header } from './components/Header';
 import { Input } from './components/Input';
 import { Button } from './components/Button';
-import { ToDoList } from './components/ToDoList';
+import { ToDo } from './components/ToDo';
 
 import styles from './App.module.css';
 
@@ -22,22 +22,37 @@ export interface ToDoProps {
 function App() {
   const [toDoList, setToDoList] = useState<ToDoProps[]>([]);
   const [newCreatedToDo, setNewCreatedToDo] = useState('');
-  const [toDoTotal, setToDoTotal] = useState<number>();
-  const [closedToDoTotal, setClosedToDoTotal] = useState<number>();
+  const [toDoTotal, setToDoTotal] = useState<number>(0);
+  const [closedToDoTotal, setClosedToDoTotal] = useState<number>(0);
 
   useEffect(() => {
     setToDoTotal(toDoList.length);
 
-    setClosedToDoTotal(toDoList.reduce(
+    countClosedToDo();
+  }, [toDoList]);
+
+  useEffect(() => {
+    console.log('toDoTotal', toDoTotal);
+  }, [toDoTotal]);
+
+  useEffect(() => {
+    console.log('closedToDoTotal', closedToDoTotal);
+  }, [closedToDoTotal]);
+
+  function countClosedToDo() {
+    let countClosedToDo = 0;
+    countClosedToDo = toDoList.reduce(
       (previousValue, currentValue) => {
         if (!currentValue.isOpen) {
           previousValue++;
         }
         return previousValue;
       },
-      0
-    ));
-  }, [toDoList]);
+      countClosedToDo
+    );
+
+    setClosedToDoTotal(countClosedToDo);
+  }
 
   function handleNewToDoChange(event: ChangeEvent<HTMLInputElement>) {
     // event.target.setCustomValidity("");
@@ -57,7 +72,7 @@ function App() {
     setNewCreatedToDo('');
   }
 
-  function toggleIsOpenToDo(id: string) {
+  function handleToggleIsOpenToDo(id: string) {
     const updatedToDoList = toDoList;
 
     const index = updatedToDoList.findIndex(toDo => toDo.id === id);
@@ -66,10 +81,13 @@ function App() {
       updatedToDoList[index].isOpen = !updatedToDoList[index].isOpen;
     }
 
+    updatedToDoList.sort((a, b) => Number(b.isOpen) - Number(a.isOpen));
+
     setToDoList(updatedToDoList);
+    countClosedToDo();
   }
 
-  function deleteToDo(id: string) {
+  function handleDeleteToDo(id: string) {
     const toDoListWithoutDeletedOne = toDoList.filter(toDo => 
       toDo.id !== id
     );
@@ -96,7 +114,7 @@ function App() {
           </Button>
         </form>
 
-        <div className={styles.toDoContent}>
+        <div>
           <div className={styles.toDoinfo}>
             <p className={styles.createdText}>
               Tarefas criadas <span className={styles.createdNumber}>
@@ -114,7 +132,7 @@ function App() {
           {toDoList.length === 0 
             ? (
               <div className={styles.emptyContainer}>
-                <img src={emptyListImg} className={styles.emptyImage} />
+                <img src={emptyImage} className={styles.emptyImage} />
                 <p className={styles.emptyTitle}>
                   Você ainda não tem tarefas cadastradas
                 </p>
@@ -123,11 +141,16 @@ function App() {
                 </p>
               </div>
             ) : (
-              <ToDoList 
-                toDoList={toDoList} 
-                onDeleteToDo={deleteToDo} 
-                onToggleIsOpenToDo={toggleIsOpenToDo}
-              />
+              <div>
+                {toDoList.map(toDo => (
+                  <ToDo 
+                    key={toDo.id}
+                    toDo={toDo}
+                    onToggleIsOpenToDo={handleToggleIsOpenToDo}
+                    onDeleteToDo={handleDeleteToDo}
+                  />
+                ))}
+              </div>
             )
           }
         </div>
@@ -136,4 +159,4 @@ function App() {
   )
 }
 
-export default App
+export default App;

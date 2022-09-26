@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { CheckCircle, Circle, Trash } from 'phosphor-react';
 
-import { ToDoProps } from '../../../App';
+import { ToDoProps } from '../../App';
 
 import styles from './ToDo.module.css';
 
@@ -43,7 +43,7 @@ export function ToDo({ toDo, onToggleIsOpenToDo, onDeleteToDo }: Props) {
         )}
       </button>
 
-      <p className={styles.text}>
+      <p className={isOpen ? styles.text : styles.closedText}>
         {content}
       </p>
 
